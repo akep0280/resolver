@@ -32,6 +32,15 @@ class resolver::config {
         source => 'puppet:///modules/resolver/anubis.conf',
         }
       }
+    elsif $::ipaddress == '^10\.0\.' {
+        file {'/etc/resolv.conf':
+          ensure => 'file',
+          owner  => 'root',
+          group  => 'root',
+          mode   => '0644',
+          source => 'puppet:///modules/resolver/puppet.conf',
+          }
+        }
     else {
       fail("Server $ipaddress does not match resolv.conf listing")
     }
