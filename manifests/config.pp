@@ -33,7 +33,7 @@ class resolver::config {
         }
       }
     else {
-      warning('Server $ipaddress does not match resolv.conf listing'),
+      warning('Server $ipaddress does not match resolv.conf listing')
     }
 #      '^172\.16\.' => 'puppet:///modules/resolver/cerberus.conf',
 #      '^172\.17\.' => 'puppet:///modules/resolver/dns01.conf',
