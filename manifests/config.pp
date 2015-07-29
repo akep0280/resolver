@@ -9,4 +9,6 @@ class resolver::config {
       '^172\.16\.' => 'puppet:///modules/resolver/cerberus.conf',
       '^172\.17\.' => 'puppet:///modules/resolver/dns01.conf',
       '^192\.168\.'  => 'puppet:///modules/resolver/anubis.conf',
+    }
+  }
 }
