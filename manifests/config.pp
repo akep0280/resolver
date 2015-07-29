@@ -5,10 +5,21 @@ class resolver::config {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => $::ipaddress ? {
-      '^172\.16\.' => 'puppet:///modules/resolver/cerberus.conf',
-      '^172\.17\.' => 'puppet:///modules/resolver/dns01.conf',
-      '^192\.168\.'  => 'puppet:///modules/resolver/anubis.conf',
+    if $::ipaddress == '^172\.16\.'  {
+      source => 'puppet:///modules/resolver/cerberus.conf',
     }
+    elsif $::ipaddress == '^172\.17\.' {
+      source => 'puppet:///modules/resolver/dns01.conf',
+    }
+    elsif $::ipaddress == '^192\.168\.' {
+      source => 'puppet:///modules/resolver/anubis.conf',
+    }
+    else {
+      warning('Server $ipaddress does not match resolv.conf listing'),
+    }
+#      '^172\.16\.' => 'puppet:///modules/resolver/cerberus.conf',
+#      '^172\.17\.' => 'puppet:///modules/resolver/dns01.conf',
+#      '^192\.168\.'  => 'puppet:///modules/resolver/anubis.conf',
+
   }
 }
