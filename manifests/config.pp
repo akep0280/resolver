@@ -1,6 +1,6 @@
 class resolver::config {
   #install DNS resolv.conf
-  #file {'/etc/resolv.conf':
+  #file '/etc/resolv.conf':
     #ensure => 'file',
     #owner  => 'root',
     #group  => 'root',
@@ -12,7 +12,8 @@ class resolver::config {
         group  => 'root',
         mode   => '0644',
         source => 'puppet:///modules/resolver/cerberus.conf',
-    }
+        }
+      }
     elsif $::ipaddress == '^172\.17\.' {
       file {'/etc/resolv.conf':
         ensure => 'file',
@@ -20,7 +21,8 @@ class resolver::config {
         group  => 'root',
         mode   => '0644',
         source => 'puppet:///modules/resolver/dns01.conf',
-    }
+        }
+      }
     elsif $::ipaddress == '^192\.168\.' {
       file {'/etc/resolv.conf':
         ensure => 'file',
@@ -28,7 +30,8 @@ class resolver::config {
         group  => 'root',
         mode   => '0644',
         source => 'puppet:///modules/resolver/anubis.conf',
-    }
+        }
+      }
     else {
       warning('Server $ipaddress does not match resolv.conf listing'),
     }
@@ -37,4 +40,3 @@ class resolver::config {
 #      '^192\.168\.'  => 'puppet:///modules/resolver/anubis.conf',
 
   }
-}
