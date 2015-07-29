@@ -2,7 +2,7 @@ class resolver::config {
   #install DNS resolv.conf
   file {'/etc/resolv.conf':
     ensure => 'file',
-    owner  => 'root'
+    owner  => 'root',
     group  => 'root',
     mode   => '0644',
     source => $::ipaddress ? {
