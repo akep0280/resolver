@@ -5,7 +5,7 @@ class resolver::config {
     #owner  => 'root',
     #group  => 'root',
     #mode   => '0644',
-    if "^172\.16\.*" in $::ipaddress  {
+    if $::ipaddress =~ /^172\.16\./  {
       file {'/etc/resolv.conf':
         ensure => 'file',
         owner  => 'root',
@@ -14,7 +14,7 @@ class resolver::config {
         source => 'puppet:///modules/resolver/cerberus.conf',
         }
       }
-    elsif "^172\.17\.*" in $::ipaddress  {
+    elsif $::ipaddress =~ /^172\.17\./ {
       file {'/etc/resolv.conf':
         ensure => 'file',
         owner  => 'root',
@@ -23,7 +23,7 @@ class resolver::config {
         source => 'puppet:///modules/resolver/dns01.conf',
         }
       }
-    elsif "^192\.168\.*" in $::ipaddress {
+    elsif  $::ipaddress =~ /^192\.168\./ {
       file {'/etc/resolv.conf':
         ensure => 'file',
         owner  => 'root',
@@ -32,7 +32,7 @@ class resolver::config {
         source => 'puppet:///modules/resolver/anubis.conf',
         }
       }
-    elsif "^10\.0\.*" in $::ipaddress {
+    elsif $::ipaddress =~ /^10\.0\./ {
         file {'/etc/resolv.conf':
           ensure => 'file',
           owner  => 'root',
